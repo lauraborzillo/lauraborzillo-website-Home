@@ -1001,12 +1001,11 @@ const visibleSlides = () => window.innerWidth <= 768 ? 1 : window.innerWidth <= 
 const maxSlide = () => totalSlides - visibleSlides();
 
 function updateCarousel() {
-  const slideWidth = 100 / visibleSlides();
-  const gap = 8;
-  const track = document.getElementById('carouselTrack');
-  const slideEl = track.querySelector('.carousel-slide');
-  const slideFullWidth = slideEl ? slideEl.offsetWidth + gap : 0;
-  track.style.transform = `translateX(-${currentSlide * slideFullWidth}px)`;
+const gap = 0;
+const track = document.getElementById('carouselTrack');
+const slideEl = track.querySelector('.carousel-slide');
+const slideFullWidth = slideEl ? slideEl.offsetWidth + gap : 0;
+track.style.transform = `translateX(-${currentSlide * slideFullWidth}px)`;
   document.getElementById('carouselCounter').textContent = `${currentSlide + 1} of ${totalSlides} photos`;
   document.querySelectorAll('.carousel-dot').forEach((d, i) => {
     d.classList.toggle('active', i === Math.floor(currentSlide / visibleSlides()));
