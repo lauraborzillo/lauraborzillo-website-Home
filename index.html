@@ -476,7 +476,7 @@ footer {
   overflow: hidden;
   padding: 0 80px;
 }
-@media(max-width:900px) { .carousel-wrap { padding: 0 28px; } }
+@media(max-width:768px) { .carousel-wrap { padding: 0; } }
 
 .carousel-track {
   display: flex;
@@ -491,7 +491,7 @@ footer {
   max-height: 340px;
 }
 @media(max-width:900px) { .carousel-slide { min-width: calc(50% - 4px); max-height: 280px; } }
-@media(max-width:768px) { .carousel-slide { min-width: 100%; height: auto; max-height: none; aspect-ratio: unset; overflow: visible; } }
+@media(max-width:768px) { .carousel-slide { min-width: 100%; height: auto; max-height: none; aspect-ratio: unset; overflow: hidden; display: flex; align-items: center; justify-content: center; } }
 .carousel-slide img {
   width: 100%;
   height: 100%;
