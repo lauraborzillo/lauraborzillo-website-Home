@@ -483,6 +483,11 @@ footer {
   gap: 8px;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+@media(max-width:768px) {
+  .carousel-track {
+    gap: 0;
+  }
+}
 .carousel-slide {
   min-width: calc(25% - 6px);
   aspect-ratio: 4/5;
