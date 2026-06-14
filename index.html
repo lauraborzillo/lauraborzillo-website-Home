@@ -1211,39 +1211,35 @@ function submitQuote(){
     ? `Hair: ${document.getElementById('simpleHair').value} people, Makeup: ${document.getElementById('simpleMakeup').value} people (will follow up for details)`
     : getPartyData();
 
-  const subject = encodeURIComponent('New Website Enquiry from ' + fv('qName'));
-  const body = encodeURIComponent(
-`NEW WEBSITE ENQUIRY
+  const templateParams = {
+    from_name: fv('qName'),
+    from_email: fv('qEmail'),
+    phone: fv('qPhone'),
+    wedding_date: fv('qDate'),
+    venue: fv('qVenue') || 'Not provided',
+    how_found: fv('qSource') || 'Not provided',
+    suburb: fv('qSuburb') || 'Not provided',
+    ceremony_timing: fv('qTiming') || 'Not provided',
+    start_time: document.getElementById('qStartTime')?.value || 'Not specified',
+    party_details: partyData,
+    vision: fv('qVision'),
+    notes: fv('qNotes') || 'None'
+  };
 
-Name: ${fv('qName')}
-Email: ${fv('qEmail')}
-Phone: ${fv('qPhone')}
-Wedding Date: ${fv('qDate')}
-Venue: ${fv('qVenue')||'Not provided'}
-How Found: ${fv('qSource')||'Not provided'}
-Getting Ready Suburb: ${fv('qSuburb')||'Not provided'}
-Ceremony & Location: ${fv('qTiming')||'Not provided'}
-Start Time: ${document.getElementById('qStartTime')?.value||'Not specified'}
-
-PARTY DETAILS:
-${partyData}
-
-VISION:
-${fv('qVision')}
-
-ADDITIONAL NOTES:
-${fv('qNotes')||'None'}`
-  );
-
-  window.location.href = `mailto:laura.borzillo@hotmail.com?subject=${subject}&body=${body}`;
-
-  setTimeout(() => {
-    document.getElementById('quoteForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-    btn.textContent = 'Send Enquiry'; btn.disabled = false;
-  }, 1000);
+  emailjs.send('service_dmjjo89', 'template_2600dqi', templateParams)
+    .then(() => {
+      document.getElementById('quoteForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      btn.textContent = 'Send Enquiry'; btn.disabled = false;
+    })
+    .catch((error) => {
+      console.error('EmailJS error:', error);
+      btn.textContent = 'Send Enquiry'; btn.disabled = false;
+      alert('Something went wrong sending your enquiry. Please try again or contact me directly.');
+    });
 }
 </script>
-<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('Y97UPChtxPADRdVZ9');</script>
 </body>
 </html>
